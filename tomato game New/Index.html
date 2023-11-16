@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<title>Tomato Game Full</title>
+<body>
+<!-- introduction -->
+<h1>Tomato game</h1> 
+
+<!--Game Window-->
+<img src="" alt="" id="game">
+
+<!--Score-->
+<h1>Score Wins <h2 id="scores">0</h2></h1>
+
+<!--input-->
+<input type='text' id='solution'>
+
+<!--event trigger to submit game-->
+<button onclick="submitGame()"> submit </button>
+  <body>
+  
+   
+
+
+  
+
+
+
+<script>
+//This Handles the score track counter
+tomatoApi();
+
+
+
+var scores = 0;
+
+
+ function submitGame (){
+  let userInput = document.getElementById("solution").value;
+
+  //get correct answer from session storage
+  let correct_answer = sessionStorage.getItem("correct_answer");
+
+
+
+  //cheak if user input is correct
+  if(userInput == correct_answer){
+
+    //add 1 to the score
+  scores ++;
+  console.log(scores);
+ document.getElementById("scores").innerText = scores.toString();
+
+  alert("Correct Answer");
+   
+  tomatoApi();
+  }else{//cheak wrong
+  alert("Worng Answer");
+
+ }
+}
+
+//this is the fetch function
+function
+tomatoApi(){
+  let apiUrl = "https://marcconrad.com/uob/tomato/api.php";
+  //fetch the api to convert to json
+  fetch(apiUrl).then(Response => Response.json())
+  .then((data)=>{
+    console.log(data)
+    let gameImage = document.getElementById("game");
+    // add the game duestion to the Html
+    gameImage.setAttribute("src", data.question);
+    //save the correct answer in the session
+    sessionStorage.setItem("correct_answer", data.solution);
+   
+
+  })
+}
+</script>
+
+
+</body>
+</html>
